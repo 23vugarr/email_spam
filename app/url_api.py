@@ -5,6 +5,7 @@ import re
 
 ########## Data Preprocessing #######################
 dataset = pd.read_csv('malicious_phish.csv')
+# dataset = pd.read_csv('/app/malicious_phish.csv')
 
 class Label_Index:
     def __init__(self, dataset):
@@ -101,9 +102,12 @@ class url_spam_detection(BaseModel):
 
 
 def find_url(message):
-    # find all urls in the message with whole length
     url_regex = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
+    www_regex = re.compile(r'www.(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
+
     urls = re.findall(url_regex, message)
+    www = re.findall(www_regex, message)
+    urls.extend(www)
     return urls
 
 
