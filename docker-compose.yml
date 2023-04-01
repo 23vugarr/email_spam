@@ -6,4 +6,4 @@ services:
     ports:
       - "8000:15400"
     volumes:
-      - ./app/:/api
+      - ./app/:/api/app/
